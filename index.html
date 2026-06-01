@@ -3592,35 +3592,23 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <div id="product-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px;"></div>
 <script>
-    const productList = [
-        { name: "Product 1", img: "https://via.placeholder.com/300" },
-        { name: "Product 2", img: "https://via.placeholder.com/300" },
-        { name: "Product 3", img: "https://via.placeholder.com/300" }
-    ];
-
-    const container = document.getElementById('product-container');
-
-    function autoLoad() {
-        // Container ရှိမှသာ အလုပ်လုပ်မယ်
-        if (container) {
-            productList.forEach(item => {
-                const card = document.createElement('div');
-                card.innerHTML = `
-                    <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
-                        <img src="${item.img}" style="width: 100%; height: 200px; object-fit: cover;">
-                        <h3>${item.name}</h3>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        } else {
-            console.log("Error: product-container ကို မတွေ့ရှိပါ။");
-        }
+    // ပုံတွေကို အလိုအလျောက် ရှာဖွေပြီး ထည့်သွင်းပေးသည့် Function
+    function autoReplaceImages() {
+        // Website ပေါ်က <img> tag တွေအားလုံးကို ရှာမယ်
+        const images = document.querySelectorAll('img');
+        
+        images.forEach((img) => {
+            // Unsplash ကနေ ပုံအသစ်တွေကို Random ဆွဲယူမယ်
+            // width=400, height=400 က ပုံရဲ့ အရွယ်အစားပါ
+            const randomID = Math.floor(Math.random() * 1000); 
+            img.src = `https://picsum.photos/400/400?random=${randomID}`;
+        });
     }
 
-    // window.onload အစား DOMContentLoaded ကိုသုံးပါ
-    document.addEventListener('DOMContentLoaded', autoLoad);
+    // Website ဖွင့်တာနဲ့ ပုံတွေကို အစားထိုးမယ်
+    window.onload = autoReplaceImages;
 </script>
+  
   
 </body>
 
